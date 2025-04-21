@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cookie Copier</title>
+</head>
+<body>
+  <h2>Cookie Copier</h2>
+  <button onclick="copyCookies()">Copy Cookies to Clipboard</button>
+  <p id="status"></p>
+
+  <script>
+    function copyCookies() {
+      const cookies = document.cookie;
+      if (!navigator.clipboard) {
+        document.getElementById('status').textContent = 'Clipboard API not supported.';
+        return;
+      }
+      navigator.clipboard.writeText(cookies)
+        .then(() => {
+          document.getElementById('status').textContent = 'Cookies copied to clipboard!';
+        })
+        .catch(err => {
+          document.getElementById('status').textContent = 'Failed to copy cookies: ' + err;
+        });
+    }
+  </script>
+</body>
+</html>
